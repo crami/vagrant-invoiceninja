@@ -51,13 +51,11 @@ cd /var/www
 
 composer install --no-dev -o
 
-#sed -i -e "s/'database'  => env('DB_DATABASE', 'forge')/'database'  => env('DB_DATABASE', 'ininja')/" config/database.php
-#sed -i -e "s/'username'  => env('DB_USERNAME', 'forge')/s/'username'  => env('DB_USERNAME', 'ininjauser')/" config/database.php
-#sed -i -e "s/'password'  => env('DB_PASSWORD', '')/'password'  => env('DB_PASSWORD', '${MYSQLPW}')/" config/database.php
+if ! [ -f /var/www/.env ]; then
 
-KEY=$(php artisan key:generate --show --no-ansi)
+  KEY=$(php artisan key:generate --show --no-ansi)
 
-cat >/var/www/.env<<EOM
+  cat >/var/www/.env<<EOM
 APP_ENV=production
 APP_DEBUG=false
 # APP_URL=https://ninja.dev
@@ -85,8 +83,9 @@ MAIL_PASSWORD
 LOG=single
 EOM
 
-php artisan migrate --force
-php artisan db:seed --force
+  php artisan migrate --force
+  php artisan db:seed --force
+fi
 
 rm /etc/nginx/sites-enabled/default
 ln -s /vagrant/nginx-default /etc/nginx/sites-enabled/default
