@@ -1,0 +1,5 @@
+*~
+.vagrant/
+.mysql-passes
+ininja.key
+ininja.crt
