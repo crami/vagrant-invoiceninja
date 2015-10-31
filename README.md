@@ -14,3 +14,7 @@ Then clone this repository and do a
 <code>
 vagrant up
 </code>
+
+One the VM is created you can connect to https://localhost:8443
+
+Enjoy
