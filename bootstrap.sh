@@ -55,7 +55,7 @@ if ! [ -f /var/www/.env ]; then
 
   KEY=$(php artisan key:generate --show --no-ansi)
 
-  cat >/var/www/.env<<EOM
+  cat >/var/www/.env<<EOF
 APP_ENV=production
 APP_DEBUG=false
 # APP_URL=https://ninja.dev
@@ -81,7 +81,7 @@ MAIL_PASSWORD
 #PHANTOMJS_CLOUD_KEY='a-demo-key-with-low-quota-per-ip-address'
 
 LOG=single
-EOM
+EOF
 
   php artisan migrate --force
   php artisan db:seed --force
