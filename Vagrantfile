@@ -14,6 +14,12 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "thoomi/debian8-amd64"
 
+  # in case you want to use VMware Fusion instead of Virtualbox we need a
+  # slightly different base box
+  config.vm.provider "vmware_fusion" do |v, override|
+    override.vm.box = "CorbanRaun/jessie64"
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -54,6 +60,11 @@ Vagrant.configure(2) do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+
+  config.vm.provider "vmware_fusion" do |vm|
+    vm.vmx["memsize"] = "1024"
+    vm.vmx["numvcpus"] = "2"
+  end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
